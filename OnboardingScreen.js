@@ -39,8 +39,8 @@ export default function OnboardingScreen() {
                             <Lottie style={{ width: '100%', height: '100%' }} source={require('../assets/animations/findtask.json')} autoPlay loop />
                         </View>
                     ),
-                    title: 'Boost Productivity',
-                    subtitle: 'Subscribe this channel to boost your productivity level',
+                    title: 'Errands pilling up?',
+                    subtitle: 'Finding short term job opportunities.',
                 },
                 {
                     backgroundColor: '#fef3c7',
@@ -49,18 +49,18 @@ export default function OnboardingScreen() {
                             <Lottie style={{ width: '100%', height: '100%' }} source={require('../assets/animations/findhelp.json')} autoPlay loop />
                         </View>
                     ),
-                    title: 'Work Seamlessly',
-                    subtitle: 'Get your work done seamlessly without interruption',
+                    title: 'Falling behind on tasks?',
+                    subtitle: 'Asking for help for your job.',
                 },
                 {
-                    backgroundColor: '#6D7CFF',
+                    backgroundColor: '#525DC0',
                     image: (
                         <View style={styles.lottie}>
                             <Lottie style={{ width: '100%', height: '100%' }} source={require('../assets/animations/tasker.json')} autoPlay loop />
                         </View>
                     ),
-                    title: 'Achieve Higher Goals',
-                    subtitle: 'By boosting your productivity we help you to achieve higher goals',
+                    title: 'To-do-list growing tremendously?',
+                    subtitle: 'Real time messaging the service providers or job seekers.',
                 },
             ]}
         />
