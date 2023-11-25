@@ -40,7 +40,7 @@ const MainPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff', // Set the background color for the entire container
+    backgroundColor: '#fff', 
   },
   header: {
     height: 50,
