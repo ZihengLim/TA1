@@ -1,12 +1,164 @@
-import React, { Component } from 'react'
-import Login from './screens/login'
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native';
 
-class MyApp extends Component {
-  render() {
+const dummyDB = {
+  'user@example.com': 'password123', // Replace with your dummy credentials
+};
+
+ // Make sure the path is correct
+
+const App = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    if (dummyDB[email] && dummyDB[email] === password) {
+      setIsLoggedIn(true);
+    } else {
+      Alert.alert('Invalid credentials', 'The email and password you entered did not match our records. Please double-check and try again.');
+    }
+  };
+
+  if (isLoggedIn) {
     return (
-      <Login />
-    )
+      <View style={styles.container}>
+        <Text style={styles.successMessage}>
+          Login Successful!
+          <Text style={styles.taskText}>Task</Text>
+          <Text style={styles.awayText}>Away</Text>
+        </Text>
+      </View>
+    );
   }
-}
 
-export default MyApp
+  return (
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      enabled
+    >
+      <ScrollView contentContainerStyle={styles.scrollView}>
+ 
+        <Text style={styles.welcome}>
+          Welcome to
+          <Text style={styles.taskText}>Task</Text>
+          <Text style={styles.awayText}>Away</Text>
+          
+          </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>LOGIN</Text>
+          
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert('Redirect', 'Navigate to Sign Up')}>
+          <Text style={styles.signupText}>
+            DID NOT HAVE AN ACCOUNT YET? <Text style={styles.boldText}>Sign Up</Text>
+          </Text>
+          <View style={styles.body}>
+            <Text style={styles.body}>dsds</Text>
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    fontWeight: 'bold',
+    color: '#1E232C'
+  },
+  input: {
+    width: '100%',
+    backgroundColor: '#fff',
+    padding: 15,
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: '#FDAB2F',
+    width: '100%',
+    padding: 15,
+  },
+  buttonText: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  signupText: {
+    color: '#1c313a',
+    marginTop: 15,
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 20,
+  },
+  successMessage: {
+    fontSize: 18,
+    color: 'green',
+  },
+  taskText: {
+    color: '#120D92',
+  },
+  awayText: {
+    color: '#FDAB2F'
+  },
+  body:{
+    position: "absolute",
+    backgroundColor:"yellow",
+    height:30,
+    width:300,
+    justifyContent:"flex-end",
+    top:0,
+    left:0,
+    right:250
+
+
+  }
+
+});
+
+export default App;
