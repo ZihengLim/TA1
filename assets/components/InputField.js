@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput} from 'react-native';
 
 const EmailInputField = () => (
-  <View style={styles.inputFieldContainer}>
+  <>
     <Text style={styles.inputName}>E-MAIL:</Text>
     <TextInput
       style={styles.inputField}
@@ -10,11 +10,11 @@ const EmailInputField = () => (
       placeholderTextColor="#A19393"
       selectionColor="#000000"
     />
-  </View>
+  </>
 );
 
 const PasswordInputField = () => (
-  <View style={styles.inputFieldContainer}>
+  <>
     <Text style={styles.inputName}>PASSWORD:</Text>
     <TextInput
       style={styles.inputField}
@@ -22,13 +22,10 @@ const PasswordInputField = () => (
       placeholderTextColor="#A19393"
       selectionColor="#000000"
     />
-  </View>
+  </>
 );
 
 const styles = StyleSheet.create({
-  inputFieldContainer: {
-    paddingHorizontal: 30,
-  },
   inputName: {
     fontSize: 15,
     marginBottom: 10,
@@ -37,7 +34,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     paddingHorizontal: 10,
-    marginBottom: 25,
+    marginBottom: 20,
     borderColor: '#120D92',
     borderWidth: 1.5,
     borderRadius: 5,
