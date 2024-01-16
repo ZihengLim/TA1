@@ -10,44 +10,45 @@ import {
 import {
   EmailInputField,
   PasswordInputField,
-} from '../assets/components/InputField';
-import {LongButton} from '../assets/components/Buttons';
-import {useNavigation} from '@react-navigation/native';
+} from './assets/components/InputField';
+import {LongButton} from './assets/components/LongButtons';
 
 export default function LoginScreen() {
-  const navigation = useNavigation();
-
   return (
     <View style={styles.loginScreenContainer}>
       <ScrollView
         style={styles.loginScreenContent}
         keyboardShouldPersistTaps="always">
-        <View style={styles.loginScreenLogoContainer}>
-          <Image
-            style={styles.loginScreenLogo}
-            source={require('../assets/images/TaskAwayLogo.png')}
-          />
-        </View>
+        <Image
+          style={styles.logo}
+          source={require('./assets/images/TaskAwayLogo.png')}
+        />
         <Text style={styles.welcomeText}>
-          Welcome to{'\t'}
+          Welcome to{'\t\t'}
           <Text style={styles.taskText}>
-            Task
-            <Text style={styles.awayText}>Away</Text>
+            Task<Text style={styles.awayText}>Away</Text>
           </Text>
         </Text>
-        <View style={styles.inputContainer}>
+        <View style={styles.inputFieldContainer}>
           <EmailInputField />
           <PasswordInputField />
         </View>
-        <LongButton name={'LOGIN'} />
-        <TouchableOpacity onPress={() => navigation.navigate('PasswordReset')}>
-          <Text style={styles.forgotPasswordHyperlink}>FORGOT PASSWORD?</Text>
-        </TouchableOpacity>
-        <View style={styles.signuptextContainer}>
-          <Text style={styles.signupText}>DID NOT HAVE AN ACCOUNT YET?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.signupHyperlink}>{'\t'}Sign Up</Text>
+        <View style={styles.buttonContainer}>
+          <LongButton name={'LOGIN'} />
+        </View>
+        <View style={styles.bottomTextcontainer}>
+          <TouchableOpacity
+            onPress={() => console.log('Forgot Password Pressed')}>
+            <Text style={styles.forgotPassword}>FORGOT PASSWORD ?</Text>
           </TouchableOpacity>
+          <View style={styles.signupContainer}>
+            <Text style={styles.noAccountText}>
+              DID NOT HAVE AN ACCOUNT YET?{' '}
+            </Text>
+            <TouchableOpacity onPress={() => console.log('Sign Up Pressed')}>
+              <Text style={styles.signupHyperlink}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -61,18 +62,19 @@ const styles = StyleSheet.create({
   },
   loginScreenContent: {
     flex: 1,
-    marginBottom: 30,
+    marginTop: 20,
   },
-  loginScreenLogoContainer: {
-    alignItems: 'center',
-    marginTop: 80,
-    marginBottom: 10,
+  logo: {
+    height: 180,
+    width: 190,
+    alignSelf: 'center',
   },
   welcomeText: {
     textAlign: 'center',
-    color: '#000000',
+    fontSize: 30,
     fontWeight: '700',
-    fontSize: 28,
+    color: '#000000',
+    marginVertical: 10,
   },
   taskText: {
     color: '#120D92',
@@ -80,30 +82,38 @@ const styles = StyleSheet.create({
   awayText: {
     color: '#FDAB2F',
   },
-  inputContainer: {
-    marginTop: 30,
-    marginBottom: 20,
+  inputFieldContainer: {
+    marginVertical: 20,
+    paddingHorizontal: 30,
   },
-  forgotPasswordHyperlink: {
-    textAlign: 'center',
-    marginTop: 30,
+  buttonContainer: {
+    alignItems: 'center',
+    paddingHorizontal: 30,
+    marginVertical: 10,
+  },
+  bottomTextcontainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  forgotPassword: {
     color: '#3193ED',
     textDecorationLine: 'underline',
     fontSize: 15,
     fontWeight: '500',
+    marginTop: 10,
     marginBottom: 5,
   },
-  signuptextContainer: {
+  signupContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  signupText: {
+  noAccountText: {
     color: '#000000',
-    fontWeight: '400',
+    fontSize: 15,
   },
   signupHyperlink: {
-    fontWeight: '900',
     color: '#000000',
+    fontWeight: '900',
+    fontSize: 15,
   },
 });
+
