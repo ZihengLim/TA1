@@ -1,57 +1,67 @@
 import React from 'react';
 import {
   Image,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   EmailInputField,
   PasswordInputField,
-} from './assets/components/InputField';
-import {LongButton} from './assets/components/LongButtons';
+} from '../Assets/Components/InputField';
+import {LongButton} from '../Assets/Components/LongButton';
+import {useNavigation} from '@react-navigation/native';
+
+const Logo = require('../Assets/Images/TaskAwayLogo.png');
 
 export default function LoginScreen() {
+  const navigation = useNavigation();
+
+  const handleSignUpPress = () => {
+    navigation.navigate('SignUp');
+  };
   return (
-    <View style={styles.loginScreenContainer}>
-      <ScrollView
-        style={styles.loginScreenContent}
-        keyboardShouldPersistTaps="always">
-        <Image
-          style={styles.logo}
-          source={require('./assets/images/TaskAwayLogo.png')}
-        />
-        <Text style={styles.welcomeText}>
-          Welcome to{'\t\t'}
-          <Text style={styles.taskText}>
-            Task<Text style={styles.awayText}>Away</Text>
-          </Text>
-        </Text>
-        <View style={styles.inputFieldContainer}>
-          <EmailInputField />
-          <PasswordInputField />
-        </View>
-        <View style={styles.buttonContainer}>
-          <LongButton name={'LOGIN'} />
-        </View>
-        <View style={styles.bottomTextcontainer}>
-          <TouchableOpacity
-            onPress={() => console.log('Forgot Password Pressed')}>
-            <Text style={styles.forgotPassword}>FORGOT PASSWORD ?</Text>
-          </TouchableOpacity>
-          <View style={styles.signupContainer}>
-            <Text style={styles.noAccountText}>
-              DID NOT HAVE AN ACCOUNT YET?{' '}
+    <SafeAreaView style={styles.loginScreenContainer}>
+      <KeyboardAvoidingView
+        style={styles.flexOne}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView style={styles.flexOne} keyboardShouldPersistTaps="always">
+          <View style={styles.logoContainer}>
+            <Image style={styles.logo} source={Logo} />
+            <Text style={styles.welcomeText}>
+              Welcome To{'\t\t'}
+              <Text style={styles.taskText}>
+                Task<Text style={styles.awayText}>Away</Text>
+              </Text>
             </Text>
-            <TouchableOpacity onPress={() => console.log('Sign Up Pressed')}>
-              <Text style={styles.signupHyperlink}>Sign Up</Text>
-            </TouchableOpacity>
           </View>
-        </View>
-      </ScrollView>
-    </View>
+          <View style={styles.inputFieldContainer}>
+            <EmailInputField />
+            <PasswordInputField />
+            <LongButton buttonLabel="LOGIN" style={styles.loginButton} />
+          </View>
+          <View style={styles.hyperlinkContainer}>
+            <TouchableOpacity>
+              <Text style={styles.forgotPasswordText}>FORGOT PASSWORD?</Text>
+            </TouchableOpacity>
+            <View style={styles.sigupTextContainer}>
+              <Text style={styles.signupText}>
+                DID NOT HAVE AN ACCOUNT YET?
+                {'\t'}
+              </Text>
+              <TouchableOpacity onPress={handleSignUpPress}>
+                <Text style={styles.signupHyperlink}>Sign Up</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
@@ -60,21 +70,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
-  loginScreenContent: {
+  flexOne: {
     flex: 1,
-    marginTop: 20,
+    paddingBottom: 20,
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginTop: 50,
+    marginBottom: 20,
   },
   logo: {
-    height: 180,
-    width: 190,
-    alignSelf: 'center',
+    resizeMode: 'cover',
   },
   welcomeText: {
-    textAlign: 'center',
     fontSize: 30,
     fontWeight: '700',
     color: '#000000',
-    marginVertical: 10,
   },
   taskText: {
     color: '#120D92',
@@ -83,37 +94,32 @@ const styles = StyleSheet.create({
     color: '#FDAB2F',
   },
   inputFieldContainer: {
-    marginVertical: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 25,
   },
-  buttonContainer: {
-    alignItems: 'center',
-    paddingHorizontal: 30,
-    marginVertical: 10,
+  loginButton: {
+    marginVertical: 25,
   },
-  bottomTextcontainer: {
-    justifyContent: 'center',
+  hyperlinkContainer: {
     alignItems: 'center',
   },
-  forgotPassword: {
-    color: '#3193ED',
-    textDecorationLine: 'underline',
+  forgotPasswordText: {
     fontSize: 15,
+    textDecorationLine: 'underline',
+    color: '#3193ED',
     fontWeight: '500',
-    marginTop: 10,
     marginBottom: 5,
   },
-  signupContainer: {
+  sigupTextContainer: {
     flexDirection: 'row',
   },
-  noAccountText: {
+  signupText: {
     color: '#000000',
     fontSize: 15,
   },
   signupHyperlink: {
+    fontSize: 15,
     color: '#000000',
     fontWeight: '900',
-    fontSize: 15,
   },
 });
 
