@@ -12,7 +12,7 @@ import {
   EmailInputField,
   PasswordInputField,
 } from '../assets/components/InputField';
-import {LongButton} from '../assets/components/Buttons';
+import {LongButton} from '../assets/components/LoginRegisterButtons';
 import {useNavigation} from '@react-navigation/native';
 
 export default function SignUpScreen() {
@@ -105,3 +105,4 @@ const styles = StyleSheet.create({
     color: '#3193ED',
   },
 });
+
