@@ -1,24 +1,48 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {LoginRegisterButtons} from './assets/components/LoginRegisterButtons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {LoginRegisterButtons} from '../Assets/Components/LoginRegisterButtons';
+import {useNavigation} from '@react-navigation/native';
+
+const Colors = {
+  MainActionContainer: '#FDAB2F',
+  WelcomeText: '#000000',
+};
+
+const WelcomeScreenImage = require('../Assets/Images/WelcomeScreen.png');
 
 export default function WelcomeScreen() {
+  const navigation = useNavigation();
+
+  const handleLoginPress = () => {
+    navigation.navigate('Login');
+    console.log('Login Button Pressed');
+  };
+
+  const handleRegisterPress = () => {
+    navigation.navigate('SignUp');
+    console.log('Register Button Pressed');
+  };
+
   return (
-    <View style={styles.welcomeScreenContainer}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.welcomeScreenImage}
-          source={require('./assets/images/WelcomeScreen.png')}
-        />
+    <SafeAreaView style={styles.welcomeScreenContainer}>
+      <View style={styles.welcomeScreenImageContainer}>
+        <Image style={styles.welcomeScreenImage} source={WelcomeScreenImage} />
       </View>
-      <View style={styles.bottomContainer}>
-        <Text style={styles.welcomeText}>Welcome to TaskAway</Text>
+      <View style={styles.mainActionContainer}>
+        <Text style={styles.welcomeText}>Welcome To TaskAway</Text>
         <View style={styles.buttonContainer}>
-          <LoginRegisterButtons buttonType={'LOGIN'} />
-          <LoginRegisterButtons buttonType={'REGISTER'} />
+          <LoginRegisterButtons
+            buttonLabel={'LOGIN'}
+            onPress={handleLoginPress}
+          />
+          <LoginRegisterButtons
+            buttonLabel={'REGISTER'}
+            onPress={handleRegisterPress}
+          />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -27,27 +51,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
-  imageContainer: {
+  welcomeScreenImageContainer: {
     flex: 0.75,
-    marginVertical: 30,
   },
   welcomeScreenImage: {
     height: '100%',
     width: '100%',
     resizeMode: 'cover',
   },
-  bottomContainer: {
+  mainActionContainer: {
     flex: 0.25,
-    backgroundColor: '#FDAB2F',
-    borderTopLeftRadius: 35,
+    backgroundColor: Colors.MainActionContainer,
     borderTopRightRadius: 35,
+    borderTopLeftRadius: 35,
     alignItems: 'center',
   },
   welcomeText: {
-    marginVertical: 30,
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#000000',
+    color: Colors.WelcomeText,
+    marginVertical: 30,
   },
   buttonContainer: {
     flexDirection: 'row',
