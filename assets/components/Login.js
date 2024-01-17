@@ -1,13 +1,26 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
+const Colors = {
+  text: {
+    register: '#120D92',
+    login: '#ffffff',
+  },
+  button: {
+    register: '#ffffff',
+    login: '#120D92',
+  },
+};
+
 export const LoginRegisterButtons = ({buttonType, onPress}) => {
   const buttonStyles = getButtonStyles(buttonType);
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.generalButtonStyles, buttonStyles.specificButtonStyles]}>
+      style={[styles.generalButtonStyles, buttonStyles.specificButtonStyles]}
+      accessibilityLabel={buttonType}
+      accessibilityRole="button">
       <Text style={[styles.generalTextStyles, buttonStyles.specificTextStyles]}>
         {buttonType}
       </Text>
@@ -33,29 +46,29 @@ const getButtonStyles = buttonType => {
 const styles = StyleSheet.create({
   generalButtonStyles: {
     borderRadius: 5,
-    width: 160,
-    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000000',
     elevation: 5,
+    width: 160,
+    height: 50,
+    marginHorizontal: 20,
   },
   loginButton: {
-    backgroundColor: '#120D92',
-    marginHorizontal: 20,
+    backgroundColor: Colors.button.login,
   },
   registerButton: {
-    backgroundColor: '#ffffff',
-    marginHorizontal: 20,
+    backgroundColor: Colors.button.register,
   },
   generalTextStyles: {
     fontSize: 17,
     fontWeight: '500',
   },
   loginText: {
-    color: '#ffffff',
+    color: Colors.text.login,
   },
   registerText: {
-    color: '#120D92',
+    color: Colors.text.register,
   },
 });
+
