@@ -2,29 +2,28 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 
-export const LongButton = ({title, onPress}) => (
-  <TouchableOpacity style={styles.longButton} onPress={onPress}>
-    <Text style={styles.longButtonText}>{title}</Text>
+export const LongButton = ({buttonLabel, onPress, style}) => (
+  <TouchableOpacity style={[styles.longButton, style]} onPress={onPress}>
+    <Text style={styles.longButtonText}>{buttonLabel}</Text>
   </TouchableOpacity>
 );
 
 LongButton.propTypes = {
-  title: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string.isRequired,
   onPress: PropTypes.func,
+  style: PropTypes.object,
 };
 
 const styles = StyleSheet.create({
   longButton: {
+    height: 45,
     borderRadius: 5,
-    backgroundColor: '#FDAB2F',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 50,
-    paddingHorizontal: 20,
-    marginVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    backgroundColor: '#FDAB2F',
+    shadowColor: '#000000',
     elevation: 10,
+    width: '100%',
   },
   longButtonText: {
     color: '#ffffff',
