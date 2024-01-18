@@ -27,12 +27,23 @@ const Texts = {
   },
 };
 
-const InputField = ({inputFieldLabel, placeholder, isSecure}) => {
-  const [secureEntry, setSecureEntry] = useState(isSecure);
+const commonStyles = StyleSheet.create({
+  inputField: {
+    flex: 1,
+    height: 60,
+    paddingHorizontal: 10,
+  },
+  eyeIconContainer: {
+    paddingRight: 10,
+  },
+});
+
+const InputField = ({inputFieldLabel, placeholder, isSecure, secureArea}) => {
+  const [secureEntry, setSecureEntry] = useState();
 
   const handleSecureEntry = () => {
     setSecureEntry(!secureEntry);
-    console.log('Change Visibility');
+    console.log('Toggle Visibility');
   };
 
   return (
@@ -40,18 +51,18 @@ const InputField = ({inputFieldLabel, placeholder, isSecure}) => {
       <Text style={styles.inputLabel}>{inputFieldLabel}</Text>
       <View style={styles.inputFieldContainer}>
         <TextInput
-          style={styles.inputField}
+          style={commonStyles.inputField}
           placeholder={placeholder}
           placeholderTextColor={Colors.PlaceholderText}
           selectionColor={Colors.SelectionColor}
           secureTextEntry={secureEntry}
           autoCapitalize="none"
-          keyboardType={isSecure ? 'default' : 'email-address'}
+          keyboardType={secureArea ? 'default' : 'email-address'}
         />
         {isSecure && (
           <TouchableOpacity
             onPress={handleSecureEntry}
-            style={styles.eyeIconContainer}>
+            style={commonStyles.eyeIconContainer}>
             <Icon
               name={secureEntry ? 'eye-slash' : 'eye'}
               size={20}
@@ -85,14 +96,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 15,
   },
-  inputField: {
-    flex: 1,
-    height: 60,
-    paddingHorizontal: 10,
-  },
-  eyeIconContainer: {
-    paddingRight: 10,
-  },
 });
 
 const EmailInputField = () => (
@@ -108,7 +111,9 @@ const PasswordInputField = () => (
     inputFieldLabel={Texts.PasswordInputField.Label}
     placeholder={Texts.PasswordInputField.Placeholder}
     isSecure={true}
+    secureEntry={true}
   />
 );
 
 export {EmailInputField, PasswordInputField};
+
