@@ -1,26 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TextInput} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-const InputField = ({label, placeholder, isSecure}) => {
+const Colors = {
+  PlaceholderText: '#A19393',
+  InputFieldBorder: '#120D92',
+  InputLabel: '#000000',
+  SelectionColor: '#000000',
+};
+
+const Texts = {
+  EmailInputField: {
+    Label: 'E-MAIL:',
+    Placeholder: 'example@gmail.com',
+  },
+  PasswordInputField: {
+    Label: 'PASSWORD:',
+    Placeholder: '********',
+  },
+};
+
+const InputField = ({inputFieldLabel, placeholder, isSecure}) => {
+  const [secureEntry, setSecureEntry] = useState(isSecure);
+
+  const handleSecureEntry = () => {
+    setSecureEntry(!secureEntry);
+    console.log('Change Visibility');
+  };
+
   return (
     <>
-      <Text style={styles.inputLabel}>{label}</Text>
-      <TextInput
-        style={styles.inputField}
-        placeholder={placeholder}
-        placeholderTextColor="#A19393"
-        selectionColor="#000000"
-        secureTextEntry={isSecure}
-        keyboardType={isSecure ? 'default' : 'email-address'}
-        autoCapitalize="none"
-      />
+      <Text style={styles.inputLabel}>{inputFieldLabel}</Text>
+      <View style={styles.inputFieldContainer}>
+        <TextInput
+          style={styles.inputField}
+          placeholder={placeholder}
+          placeholderTextColor={Colors.PlaceholderText}
+          selectionColor={Colors.SelectionColor}
+          secureTextEntry={secureEntry}
+          autoCapitalize="none"
+          keyboardType={isSecure ? 'default' : 'email-address'}
+        />
+        {isSecure && (
+          <TouchableOpacity
+            onPress={handleSecureEntry}
+            style={styles.eyeIconContainer}>
+            <Icon
+              name={secureEntry ? 'eye-slash' : 'eye'}
+              size={20}
+              color="#000"
+            />
+          </TouchableOpacity>
+        )}
+      </View>
     </>
   );
 };
 
 InputField.propTypes = {
-  label: PropTypes.string.isRequired,
+  inputFieldLabel: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   isSecure: PropTypes.bool,
 };
@@ -28,29 +73,42 @@ InputField.propTypes = {
 const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 15,
-    color: '#000000',
+    color: Colors.InputLabel,
     fontWeight: 'bold',
     marginVertical: 10,
   },
-  inputField: {
-    borderColor: '#120D92',
-    marginBottom: 15,
+  inputFieldContainer: {
+    flexDirection: 'row',
+    borderColor: Colors.InputFieldBorder,
     borderWidth: 1.5,
     borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  inputField: {
+    flex: 1,
     height: 60,
     paddingHorizontal: 10,
   },
+  eyeIconContainer: {
+    paddingRight: 10,
+  },
 });
 
-export const EmailInputField = () => (
+const EmailInputField = () => (
   <InputField
-    label="E-MAIL:"
-    placeholder="example@gmail.com"
+    inputFieldLabel={Texts.EmailInputField.Label}
+    placeholder={Texts.EmailInputField.Placeholder}
     isSecure={false}
   />
 );
 
-export const PasswordInputField = () => (
-  <InputField label="PASSWORD:" placeholder="********" isSecure={true} />
+const PasswordInputField = () => (
+  <InputField
+    inputFieldLabel={Texts.PasswordInputField.Label}
+    placeholder={Texts.PasswordInputField.Placeholder}
+    isSecure={true}
+  />
 );
 
+export {EmailInputField, PasswordInputField};
