@@ -1,26 +1,42 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import {LoginRegisterButtons} from './Assets/Components/LoginRegisterButtons';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {LoginRegisterButtons} from '../Components/LoginRegisterButtons';
+import {useNavigation} from '@react-navigation/native';
 
+const WelcomeScreenImage = require('../Assets/Images/WelcomeScreen.png');
+const WelcomeMessage = 'Welcome To TaskAway';
 const Colors = {
-  Background: '#ffffff',
-  LoginRegisterContainer: '#FDAB2F',
-  WelcomeText: '#000000',
+  MainActionContainer: '#FDAB2F',
+  WelcomeMessage: '#000000',
 };
 
-const WelcomeScreenImage = require('./Assets/Images/WelcomeScreen.png');
-
 export default function WelcomeScreen() {
+  const navigation = useNavigation();
+
+  const handleLoginPress = () => (
+    navigation.navigate('Login'), console.log('Login Button Pressed')
+  );
+
+  const handleRegisterPress = () => (
+    navigation.navigate('SignUp'), console.log('Register Button Pressed')
+  );
   return (
-    <SafeAreaView style={styles.welcomeScreenContainer}>
+    <SafeAreaView style={styles.WelcomeScreenContainer}>
       <View style={styles.welcomeScreenImageContainer}>
         <Image style={styles.welcomeScreenImage} source={WelcomeScreenImage} />
       </View>
-      <View style={styles.loginRegisterContainer}>
-        <Text style={styles.welcomeText}>Welcome To TaskAway</Text>
+      <View style={styles.mainActionContainer}>
+        <Text style={styles.welcomeMessage}>{WelcomeMessage}</Text>
         <View style={styles.buttonContainer}>
-          <LoginRegisterButtons buttonType={'LOGIN'} />
-          <LoginRegisterButtons buttonType={'REGISTER'} />
+          <LoginRegisterButtons
+            buttonLabel={'LOGIN'}
+            onPress={handleLoginPress}
+          />
+          <LoginRegisterButtons
+            buttonLabel={'REGISTER'}
+            onPress={handleRegisterPress}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -28,35 +44,34 @@ export default function WelcomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  welcomeScreenContainer: {
+  WelcomeScreenContainer: {
     flex: 1,
-    backgroundColor: Colors.Background,
+    backgroundColor: '#ffffff',
   },
   welcomeScreenImageContainer: {
     flex: 0.75,
-    marginBottom: 30,
   },
   welcomeScreenImage: {
     height: '100%',
     width: '100%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
-  loginRegisterContainer: {
+  mainActionContainer: {
     flex: 0.25,
-    backgroundColor: Colors.LoginRegisterContainer,
-    borderTopRightRadius: 35,
+    backgroundColor: Colors.MainActionContainer,
     borderTopLeftRadius: 35,
+    borderTopRightRadius: 35,
     alignItems: 'center',
   },
-  welcomeText: {
-    marginVertical: 30,
+  welcomeMessage: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: Colors.WelcomeText,
+    color: Colors.WelcomeMessage,
+    marginVertical: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
+    paddingVertical: 20,
   },
 });
 
-});
