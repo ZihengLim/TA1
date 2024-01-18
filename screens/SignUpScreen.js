@@ -1,83 +1,109 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
+  KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {BackArrow} from '../assets/components/Icons';
+import {BackArrow} from '../Assets/Components/BackArrow';
 import LottieView from 'lottie-react-native';
 import {
   EmailInputField,
   PasswordInputField,
-} from '../assets/components/InputField';
-import {LongButton} from '../assets/components/LoginRegisterButtons';
-import {useNavigation} from '@react-navigation/native';
+} from '../Assets/Components/InputField';
+import {LongButton} from '../Assets/Components/LongButton';
+import Icon from 'react-native-vector-icons/Feather';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+const SignUpAnimation = require('../Assets/Animations/greeting.json');
 
 export default function SignUpScreen() {
-  const navigation = useNavigation();
+  const [isChecked, setIsChecked] = useState(false);
+
+  const toggleCheckBox = () => {
+    setIsChecked(!isChecked);
+  };
 
   return (
-    <View style={styles.signupScreenContainer}>
-      <ScrollView
+    <SafeAreaView style={styles.signupScreenContainer}>
+      <KeyboardAvoidingView
         style={styles.signupScreenContent}
-        keyboardShouldPersistTaps="always">
-        <View style={styles.backArrowContainer}>
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <ScrollView style={styles.signupScreenContent}>
           <BackArrow />
-        </View>
-        <View style={styles.animationContainer}>
-          <LottieView
-            autoPlay
-            loop
-            style={{
-              width: 500,
-              height: 300,
-            }}
-            source={require('../assets/animations/greeting.json')}
-          />
-        </View>
-        <View style={styles.signupHeaderTextContainer}>
-          <Text style={styles.signupHeaderText}>Sign Up</Text>
-          <Text style={styles.signupBottomText}>Fill in your details.</Text>
-        </View>
-        <EmailInputField />
-        <PasswordInputField />
-        <View style={styles.createAccountButtonContainer}>
-          <LongButton name={'CREATE ACCOUNT'} />
-        </View>
-        <View style={styles.logintextContainer}>
-          <Text style={styles.loginText}>ALREADY REGISTERED?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.loginHyperlink}>{'\t'}Login Here</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
+          <View style={styles.animationContainer}>
+            <LottieView
+              autoPlay
+              loop
+              style={styles.animation}
+              source={SignUpAnimation}
+            />
+          </View>
+          <View style={styles.signupTextContainer}>
+            <Text style={styles.signupText}>Sign Up</Text>
+            <Text style={styles.signupBottomText}>Fill in your details.</Text>
+          </View>
+          <View style={styles.inputFieldContainer}>
+            <EmailInputField />
+            <PasswordInputField />
+            <View style={styles.termConditionContainer}>
+              <TouchableOpacity
+                onPress={toggleCheckBox}
+                style={styles.checkBox}>
+                <Icon
+                  name={isChecked ? 'check-square' : 'square'}
+                  size={20}
+                  color="black"
+                />
+              </TouchableOpacity>
+              <Text style={styles.termConditionText}>
+                I read and agree to{'\t'}
+              </Text>
+              <TouchableOpacity>
+                <Text style={styles.TermConditionHyperlink}>
+                  Terms & Conditions
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <LongButton
+              buttonLabel="CREATE ACCOUNT"
+              style={styles.signupButton}
+            />
+          </View>
+          <View style={styles.hyperlinkContainer}>
+            <Text style={styles.loginText}>ALREADY REGISTERED?</Text>
+            <TouchableOpacity>
+              <Text style={styles.loginHyperlink}>{'\t'}Log in Here</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   signupScreenContainer: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fffff',
   },
   signupScreenContent: {
     flex: 1,
-  },
-  backArrowContainer: {
-    paddingLeft: 20,
-    marginTop: 30,
+    paddingBottom: 20,
   },
   animationContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  signupHeaderTextContainer: {
+  animation: {
+    width: '100%',
+    height: 200,
+  },
+  signupTextContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  signupHeaderText: {
+  signupText: {
     fontSize: 30,
     fontWeight: 'bold',
     color: '#000000',
@@ -86,23 +112,41 @@ const styles = StyleSheet.create({
     color: '#676565',
     fontSize: 15,
   },
-  createAccountButtonContainer: {
-    marginTop: 20,
-    marginBottom: 20,
+  inputFieldContainer: {
+    paddingHorizontal: 25,
   },
-  logintextContainer: {
+  termConditionContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
+    paddingHorizontal: 25,
+  },
+  checkBox: {
+    marginRight: 10,
+  },
+  termConditionText: {
+    color: '#000000',
+  },
+  TermConditionHyperlink: {
+    color: '#120D92',
+    textDecorationLine: 'underline',
+    fontWeight: '500',
+  },
+  signupButton: {
+    marginTop: 30,
+  },
+  hyperlinkContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   loginText: {
     color: '#000000',
-    fontWeight: '400',
+    fontSize: 15,
   },
   loginHyperlink: {
-    fontWeight: '900',
     color: '#3193ED',
+    fontWeight: '900',
+    fontSize: 15,
   },
 });
 
