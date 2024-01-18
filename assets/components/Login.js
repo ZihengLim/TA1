@@ -1,74 +1,79 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 const Colors = {
-  text: {
-    register: '#120D92',
-    login: '#ffffff',
+  ButtonLabel: {
+    Register: '#120D92',
+    Login: '#ffffff',
   },
-  button: {
-    register: '#ffffff',
-    login: '#120D92',
+  ButtonBackground: {
+    Register: '#ffffff',
+    Login: '#120D92',
   },
 };
 
-export const LoginRegisterButtons = ({buttonType, onPress}) => {
-  const buttonStyles = getButtonStyles(buttonType);
+export const LoginRegisterButtons = ({buttonLabel, onPress}) => {
+  const buttonStyles = getButtonStyles(buttonLabel);
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.generalButtonStyles, buttonStyles.specificButtonStyles]}
-      accessibilityLabel={buttonType}
-      accessibilityRole="button">
-      <Text style={[styles.generalTextStyles, buttonStyles.specificTextStyles]}>
-        {buttonType}
+      style={[styles.generalStyles, buttonStyles.specificStyles]}>
+      <Text
+        style={[styles.generalLabelStyles, buttonStyles.specificLabelStyles]}>
+        {buttonLabel}
       </Text>
     </TouchableOpacity>
   );
 };
 
-const getButtonStyles = buttonType => {
-  switch (buttonType) {
+LoginRegisterButtons.propTypes = {
+  buttonLabel: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+};
+
+const getButtonStyles = buttonLabel => {
+  switch (buttonLabel) {
     case 'LOGIN':
       return {
-        specificButtonStyles: styles.loginButton,
-        specificTextStyles: styles.loginText,
+        specificStyles: styles.loginButton,
+        specificLabelStyles: styles.loginLabel,
       };
     case 'REGISTER':
       return {
-        specificButtonStyles: styles.registerButton,
-        specificTextStyles: styles.registerText,
+        specificStyles: styles.registerButton,
+        specificLabelStyles: styles.registerLabel,
       };
   }
 };
 
 const styles = StyleSheet.create({
-  generalButtonStyles: {
-    borderRadius: 5,
-    justifyContent: 'center',
+  generalStyles: {
     alignItems: 'center',
+    justifyContent: 'center',
     shadowColor: '#000000',
     elevation: 5,
-    width: 160,
-    height: 50,
+    borderRadius: 5,
     marginHorizontal: 20,
+    width: 150,
+    height: 50,
   },
   loginButton: {
-    backgroundColor: Colors.button.login,
+    backgroundColor: Colors.ButtonBackground.Login,
   },
   registerButton: {
-    backgroundColor: Colors.button.register,
+    backgroundColor: Colors.ButtonBackground.Register,
   },
-  generalTextStyles: {
+  generalLabelStyles: {
     fontSize: 17,
     fontWeight: '500',
   },
-  loginText: {
-    color: Colors.text.login,
+  loginLabel: {
+    color: Colors.ButtonLabel.Login,
   },
-  registerText: {
-    color: Colors.text.register,
+  registerLabel: {
+    color: Colors.ButtonLabel.Register,
   },
 });
 
