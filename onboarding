@@ -1,0 +1,132 @@
+import React, {useState} from 'react';
+import {Image, StyleSheet, View, Text} from 'react-native';
+import {RFPercentage} from 'react-native-responsive-fontsize';
+import Swiper from 'react-native-swiper';
+import WelcomeScreen from './WelcomeScreen';
+
+const onboardingImage1 = require('../Assets/Images/Onboarding1.png');
+const onboardingImage2 = require('../Assets/Images/Onboarding2.png');
+const onboardingImage3 = require('../Assets/Images/Onboarding3.png');
+
+export default function OnboardingScreen() {
+  const [index, setIndex] = useState(0);
+
+  // Determine if the current screen is the last onboarding screen
+  const isLastOnboardingScreen = index === 2; // Adjust this if you have more onboarding screens
+
+  return (
+    <Swiper
+      loop={false}
+      index={index}
+      onIndexChanged={i => setIndex(i)}
+      showsPagination={!isLastOnboardingScreen} // Hide pagination on the last onboarding screen
+      dot={<View style={styles.dot} />}
+      activeDot={<View style={styles.activeDot} />}>
+      {/* Onboarding Screens */}
+      <View style={styles.slide}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={onboardingImage1} />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.onboardingTitle}>Errands piling up?</Text>
+          <Text style={styles.onboardingText}>
+            Finding short term job opportunities.
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.slide}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={onboardingImage2} />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.onboardingTitle}>Falling behind on tasks?</Text>
+          <Text style={styles.onboardingText}>
+            Asking for help for your job.
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.slide}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={onboardingImage3} />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.onboardingTitle}>
+            To-do-list growing tremendously?
+          </Text>
+          <Text style={styles.onboardingText}>
+            Real time messaging the service providers or job seekers.
+          </Text>
+        </View>
+      </View>
+
+      {/* Welcome Screen */}
+      {isLastOnboardingScreen && (
+        <View style={styles.slide}>
+          <WelcomeScreen />
+        </View>
+      )}
+    </Swiper>
+  );
+}
+
+const styles = StyleSheet.create({
+  slide: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  imageContainer: {
+    flex: 0.75,
+    alignItems: 'center',
+  },
+  image: {
+    resizeMode: 'contain',
+    height: '100%',
+    width: '100%',
+  },
+  textContainer: {
+    flex: 0.25,
+    backgroundColor: '#FDAB2F',
+    borderTopLeftRadius: 35,
+    borderTopRightRadius: 35,
+    alignItems: 'center',
+  },
+  onboardingTitle: {
+    color: '#000000',
+    fontSize: RFPercentage(3.7),
+    fontWeight: 'bold',
+    marginTop: 25,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  onboardingText: {
+    fontSize: RFPercentage(2.3),
+    color: '#000000',
+    fontWeight: '300',
+    textAlign: 'center',
+    paddingHorizontal: 15,
+  },
+  dot: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  activeDot: {
+    backgroundColor: '#000',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  // ... any additional styles you might have ...
+});
+
