@@ -27,7 +27,7 @@ const TermsAndConditions = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Terms and Conditions</Text>
+      <Text style={styles.titleContainer}>Terms and Conditions</Text>
       <ScrollView
         style={styles.scrollView}
         onScroll={({nativeEvent}) => handleScroll(nativeEvent)}>
@@ -49,7 +49,7 @@ const TermsAndConditions = () => {
           you a limited, non-exclusive, non-transferable, revocable license to
           download, install, and use the Application for your personal,
           non-commercial purposes strictly in accordance with the Application's
-          documentation.
+          documentation
           {'\n\n'}
           This website uses cookies to monitor browsing preferences. If you do
           allow cookies to be used, the following personal information may be
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     padding: scale(20),
   },
-  title: {
+  titleContainer: {
     fontSize: RFPercentage(3.5),
     fontWeight: 'bold',
     textAlign: 'center',
