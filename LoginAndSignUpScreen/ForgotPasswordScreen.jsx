@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(10),
   },
   errorInput: {
-    borderColor: 'red',
+    borderColor: 'red'
+    borderwidth: 2,
   },
 });
 
