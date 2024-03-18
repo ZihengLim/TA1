@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     fontWeight: 'bold',
-    fontSize: RFPercentage(1.6),
+    fontSize: RFPercentage(1.8),
   },
 });
 
