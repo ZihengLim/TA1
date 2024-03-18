@@ -159,7 +159,7 @@ const LoginScreen = () => {
       <Text
         style={[
           styles.hyperText,
-          {textAlign: 'center', marginBottom: verticalScale(20)},
+          {textAlign: 'center', marginBottom: verticalScale(23)},
         ]}
         onPress={() => navigation.navigate('PhoneNumber')}>
         Login via Phone
