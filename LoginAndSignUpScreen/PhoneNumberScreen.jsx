@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: screenWidth,
-    height: screenHeight * 0.35,
+    height: screenHeight * 0.36,
     resizeMode: 'contain',
     alignSelf: 'center',
     marginBottom: verticalScale(10),
