@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     alignItems: 'center',
-    marginBottom: verticalScale(30),
+    marginBottom: verticalScale(35),
   },
   title: {
     fontSize: RFPercentage(3),
