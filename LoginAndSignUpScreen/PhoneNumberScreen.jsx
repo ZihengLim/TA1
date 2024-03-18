@@ -41,27 +41,7 @@ const PhoneNumberScreen = () => {
     const checkValid = phoneInputRef.current?.isValidNumber(value);
     setValid(!!checkValid);
 
-    if (checkValid) {
-      setLoading(true);
-      try {
-        const confirmation = await auth().signInWithPhoneNumber(value);
-        navigation.navigate('OTPVerification', {
-          phoneNumber: value,
-          countryCode: countryCode,
-          confirmation: confirmation,
-        });
-        LogBox.ignoreLogs([
-          'Non-serializable values were found in teh navigation state',
-        ]);
-      } catch (error) {
-        setErrorMessage('Failed to send verification code. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      setErrorMessage('Invalid phone number');
-    }
-  };
+  
 
   return (
     <View style={styles.container}>
