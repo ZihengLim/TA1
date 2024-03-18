@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
   },
   animation: {
     alignSelf: 'center',
-    width: screenWidth * 0.75,
-    height: screenHeight * 0.25,
+    width: screenWidth * 0.70,
+    height: screenHeight * 0.3,
     marginBottom: verticalScale(30),
   },
   instructions: {
