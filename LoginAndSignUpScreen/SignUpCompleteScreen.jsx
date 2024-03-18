@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     fontSize: RFPercentage(2),
     fontWeight: 'bold',
     color: '#ffffff',
-    textAlign: 'center',
+    alignSelf: 'center',
   },
 });
 
