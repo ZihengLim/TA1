@@ -144,29 +144,6 @@ const CreateProfileScreen = () => {
       if (form.goals.earnMoney) {
         goals.push('Earn money');
       }
-
-      try {
-        await userDocRef.set(
-          {
-            firstName: form.firstName.trim(),
-            lastName: form.lastName.trim(),
-            dob: form.dob.trim(),
-            postcode: form.postcode.trim(),
-            goals: goals,
-          },
-          {merge: true},
-        );
-
-        console.log('Profile updated successfully!');
-        navigation.navigate('SignUpComplete');
-      } catch (error) {
-        console.error('Error updating profile:', error);
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      setLoading(false);
-    }
   };
 
   return (
