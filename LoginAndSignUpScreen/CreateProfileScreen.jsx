@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ActivityIndicator,
+  Text
 } from 'react-native';
 import {RFPercentage} from 'react-native-responsive-fontsize';
 import {scale, verticalScale} from 'react-native-size-matters';
