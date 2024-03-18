@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+    View,
   Alert,
   Dimensions,
   Image,
@@ -11,7 +12,7 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
+
   ActivityIndicator,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
