@@ -83,19 +83,7 @@ const LoginScreen = () => {
       return;
     }
 
-    setLoading(true);
-    try {
-      await auth().signInWithEmailAndPassword(email.text, password.text);
-      navigation.navigate('Tab');
-    } catch (error) {
-      setLoginError('Invalid Email or Password');
-      setEmail(prev => ({...prev, error: true}));
-      setPassword(prev => ({...prev, error: true}));
-    } finally {
-      setLoading(false);
-    }
-  };
-
+   
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
