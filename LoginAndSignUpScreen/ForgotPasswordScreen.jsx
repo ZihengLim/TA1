@@ -33,28 +33,8 @@ const ForgotPasswordScreen = () => {
       setError('This field is required');
       return;
     }
-
     setLoading(true);
     setError('');
-    try {
-      await auth().sendPasswordResetEmail(email);
-      Alert.alert(
-        'Reset Link Sent',
-        'A link to reset your password has been sent to your email.',
-        [{text: 'OK'}],
-      );
-      navigation.navigate('Login');
-      setEmail('');
-    } catch (error) {
-      const message =
-        error.code === 'auth/user-not-found' ||
-        error.code === 'auth/invalid-login-credentials'
-          ? 'An unexpected error occurred. Please try again'
-          : 'The given email address is not found';
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
