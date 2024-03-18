@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     color: '#555555',
   },
   phoneInput: {
-    marginVertical: verticalScale(10),
+    marginVertical: verticalScale(8),
   },
   button: {
     backgroundColor: '#FDAB2F',
