@@ -66,21 +66,6 @@ const OTPVerificationScreen = () => {
     }
   };
 
-  const sendVerificationCode = async () => {
-    try {
-      const newConfirmation = await auth().signInWithPhoneNumber(
-        countryCode + phoneNumber,
-      );
-      route.params.confirmation = newConfirmation;
-      setTimer(60);
-    } catch (error) {
-      Alert.alert(
-        'Error',
-        'Failed to send the verification code. Please try again later.',
-      );
-    }
-  };
-
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
