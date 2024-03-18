@@ -224,7 +224,7 @@ const SignUpScreen = () => {
               }}
               disabled={loading}>
               {loading ? (
-                <ActivityIndicator size={'small'} color={'#ffffff'} />
+                <ActivityIndicator size={'large'} color={'#ffffff'} />
               ) : (
                 <Text style={styles.signUpButtonText}>CREATE ACCOUNT</Text>
               )}
