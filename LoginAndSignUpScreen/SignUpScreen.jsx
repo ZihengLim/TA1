@@ -146,26 +146,6 @@ const SignUpScreen = () => {
       return;
     }
 
-    try {
-      await auth().createUserWithEmailAndPassword(form.email, form.password);
-      navigation.navigate('CreateProfile');
-      setForm({email: '', password: '', repeatPassword: '', checkBox: false});
-    } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        setErrors(prevErrors => ({
-          ...prevErrors,
-          email: 'This email address has been registered',
-        }));
-      } else {
-        setErrors(prevErrors => ({
-          ...prevErrors,
-          firebaseError: error.message,
-        }));
-      }
-      setErrors(prevErrors => ({...prevErrors, firebaseError: error.message}));
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
